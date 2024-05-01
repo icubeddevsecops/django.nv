@@ -21,8 +21,20 @@ jobs:
     steps:
       - run: echo "This is an integration step"
       - run: exit 1
+          failure:true 
 
   prod:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "This is a deploy step"
+
+  artifacts:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo “hello” > hello.txt
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: my_file.txt
+          retention-days: 5
